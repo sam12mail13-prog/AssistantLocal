@@ -1,3 +1,4 @@
+[app]
 title = AssistantLocal
 package.name = assistantlocal
 package.domain = org.local
