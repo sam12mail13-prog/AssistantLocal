@@ -26,16 +26,22 @@ jobs:
       - name: Mettre à jour pip et installer buildozer
         run: |
           python -m pip install --upgrade pip setuptools wheel
-          pip install --user buildozer
+          pip install buildozer
+
+      - name: Vérifier les fichiers
+        run: |
+          ls -la
+          echo "--- buildozer.spec ---"
+          cat buildozer.spec
 
       - name: Compiler l'APK
         run: |
-          export PATH="$HOME/.local/bin:$PATH"
-          buildozer android debug 2>&1
+          buildozer android debug
+          ls -la bin/
 
       - name: Récupérer l'APK
         uses: actions/upload-artifact@v4
         with:
           name: AssistantLocal-APK
           path: bin/*.apk
-        if: always()
+        if: success()
